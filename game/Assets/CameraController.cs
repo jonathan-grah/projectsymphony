@@ -6,8 +6,10 @@ public class CameraController : MonoBehaviour
 {
     public float panSpeed = 20f;
     public float panBorderThickness = 10f;
+
     public float maxZoomOut = 10f;
     public float minZoomIn = 5f;
+
 
     // Update is called once per frame
     void Update()
@@ -33,6 +35,7 @@ public class CameraController : MonoBehaviour
         {
             pos.x -= panSpeed * Time.deltaTime;
         }
+
 
         if (Input.GetKey("o")) // zoom out mechanic
         {
