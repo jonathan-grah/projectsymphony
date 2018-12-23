@@ -10,7 +10,6 @@ public class Raycast : MonoBehaviour
 
     NavMeshAgent playerAgent;
 
-
     void Awake()
     {
         playerAgent = GetComponent<NavMeshAgent>();
@@ -49,7 +48,6 @@ public class Raycast : MonoBehaviour
     void MovePlayer()
     {
         playerAgent.SetDestination(targetPosition);
-        Debug.DrawLine(transform.position, targetPosition, Color.blue); // debugging line
     }
 
 
