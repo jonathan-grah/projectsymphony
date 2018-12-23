@@ -7,8 +7,11 @@ public class CameraController : MonoBehaviour
     public float panSpeed = 20f;
     public float panBorderThickness = 10f;
     public float maxZoomOut = 10f;
-    public float minZoomIn = 5f;
-    public float zoomSpeed = 1f;
+
+    //FOV settings
+    public float minFov = 15f;
+    public float MaxFov = 75f;
+    public float sensitivity = 5f;
 
     // Update is called once per frame
     void Update()
@@ -35,21 +38,13 @@ public class CameraController : MonoBehaviour
             pos.x -= panSpeed * Time.deltaTime;
         }
 
-        if (Input.GetKey("o")) // zoom out mechanic
-        {
-            if (pos.y <= maxZoomOut)
-            {
-                pos.y += zoomSpeed * Time.deltaTime;
-            }
-        }
 
-        if (Input.GetKey("i")) // zoom in mechanic
-        {
-            if (pos.y >= minZoomIn)
-            {
-                pos.y -= zoomSpeed * Time.deltaTime;
-            }
-        }
+        // zoom mechanic 
+
+        float fov = Camera.main.fieldOfView;
+        fov += Input.GetAxis("Mouse ScrollWheel") * sensitivity;
+        fov = Mathf.Clamp(fov, minFov, MaxFov);
+        Camera.main.fieldOfView = fov;
 
         transform.position = pos;
     }
