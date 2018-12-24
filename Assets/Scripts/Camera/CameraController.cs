@@ -26,50 +26,45 @@ namespace RTS_Cam
 
         #endregion
 
-        private Transform m_Transform; //camera tranform
-        public bool useFixedUpdate = false; //use FixedUpdate() or Update()
+        private Transform m_Transform;
+        public bool useLateUpdate = true;
 
         #region Movement
 
-        public float keyboardMovementSpeed = 5f; //speed with keyboard movement
-        public float screenEdgeMovementSpeed = 3f; //spee with screen edge movement
-        public float followingSpeed = 5f; //speed when following a target
-        public float rotationSped = 3f;
+        public float keyboardMovementSpeed = 5f;
+        public float screenEdgeMovementSpeed = 3f;
+        public float followingSpeed = 5f;
+        public float rotationSpeed = 3f;
         public float panningSpeed = 10f;
         public float mouseRotationSpeed = 10f;
 
         #endregion
 
         #region Height
-
-        public bool autoHeight = false;
-        public LayerMask groundMask = -1; //layermask of ground or other objects that affect height
-
-        public float maxHeight = 10f; //maximal height
-        public float minHeight = 15f; //minimnal height
+        
+        public float maxHeight = 25f;
+        public float minHeight = 2f;
         public float heightDampening = 5f;
         public float keyboardZoomingSensitivity = 2f;
         public float scrollWheelZoomingSensitivity = 25f;
-
-        private float zoomPos = 0; //value in range (0, 1) used as t in Matf.Lerp
 
         #endregion
 
         #region MapLimits
 
         public bool limitMap = true;
-        public float limitX = 50f; //x limit of map
-        public float limitY = 50f; //z limit of map
+        public float limitX = 50f;
+        public float limitY = 50f;
 
         #endregion
 
         #region Targeting
 
-        public Transform targetFollow; //target to follow
+        public Transform targetFollow;
         public Vector3 targetOffset;
 
         /// <summary>
-        /// are we following target
+        /// Is following target
         /// </summary>
         public bool FollowingTarget
         {
@@ -172,13 +167,13 @@ namespace RTS_Cam
 
         private void Update()
         {
-            if (!useFixedUpdate)
+            if (!useLateUpdate)
                 CameraUpdate();
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
-            if (useFixedUpdate)
+            if (useLateUpdate)
                 CameraUpdate();
         }
 
@@ -196,7 +191,7 @@ namespace RTS_Cam
             else
                 Move();
 
-            HeightCalculation();
+            Zoom();
             Rotation();
             LimitPosition();
         }
@@ -252,43 +247,26 @@ namespace RTS_Cam
         }
 
         /// <summary>
-        /// calcualte height
+        /// Modify zoom
         /// </summary>
-        private void HeightCalculation()
+        private void Zoom()
         {
-            ///#######
-            ///OLD LOGIC FROM PLUGIN - will revisit, keep for now
-            ///#######
-            ///Scroll zoom disabled
-            ///Camera height currently not clamped, can go below map
-
-
-            //float distanceToGround = DistanceToGround();
-            //if(useScrollwheelZooming)
-            //    zoomPos += ScrollWheel * Time.deltaTime * scrollWheelZoomingSensitivity;
-            //if (useKeyboardZooming)
-            //    zoomPos += ZoomDirection * Time.deltaTime * keyboardZoomingSensitivity;
-
-            //zoomPos = Mathf.Clamp01(zoomPos);
-
-            //float targetHeight = Mathf.Lerp(minHeight, maxHeight, zoomPos);
-
-            //m_Transform.position = Vector3.Lerp(m_Transform.position, 
-            //    new Vector3(m_Transform.position.x, targetHeight, m_Transform.position.z), Time.deltaTime * heightDampening);
-
-            ///#######
-            ///OLD LOGIC FROM PLUGIN END
-            ///#######
-
-
-            //Zoom in and out with keyboard - position not clamped
-            if (Input.GetKey(KeyCode.PageUp))
+            //Scroll zoom
+            if (useScrollwheelZooming)
             {
-                m_Transform.position += m_Transform.forward / 3;
+                if (ScrollWheel > 0 && m_Transform.position.y > minHeight)
+                    m_Transform.position += m_Transform.forward * ScrollWheel * scrollWheelZoomingSensitivity;
+                else if (ScrollWheel < 0 && m_Transform.position.y < maxHeight)
+                    m_Transform.position += m_Transform.forward * ScrollWheel * scrollWheelZoomingSensitivity;
             }
-            else if (Input.GetKey(KeyCode.PageDown))
+
+            //Keyboard zoom
+            if (useKeyboardZooming)
             {
-                m_Transform.position -= m_Transform.forward / 3;
+                if (ZoomDirection > 0 && m_Transform.position.y > minHeight)
+                    m_Transform.position -= m_Transform.forward / 3 * ZoomDirection;
+                else if(ZoomDirection < 0 && m_Transform.position.y < maxHeight)
+                    m_Transform.position -= m_Transform.forward / 3 * ZoomDirection;
             }
         }
 
@@ -298,10 +276,14 @@ namespace RTS_Cam
         private void Rotation()
         {
             if (useKeyboardRotation)
-                transform.Rotate(Vector3.up, RotationDirection * Time.deltaTime * rotationSped, Space.World);
+            {
+                transform.Rotate(Vector3.up, RotationDirection * Time.deltaTime * rotationSpeed, Space.World);
+            }
 
             if (useMouseRotation && Input.GetKey(mouseRotationKey))
+            {
                 m_Transform.Rotate(Vector3.up, -MouseAxis.x * Time.deltaTime * mouseRotationSpeed, Space.World);
+            }
         }
 
         /// <summary>
@@ -319,7 +301,9 @@ namespace RTS_Cam
         private void LimitPosition()
         {
             if (!limitMap)
+            {
                 return;
+            }
 
             m_Transform.position = new Vector3(Mathf.Clamp(m_Transform.position.x, -limitX, limitX),
                 m_Transform.position.y,
@@ -342,21 +326,7 @@ namespace RTS_Cam
         {
             targetFollow = null;
         }
-
-        /// <summary>
-        /// calculate distance to ground
-        /// </summary>
-        /// <returns></returns>
-        private float DistanceToGround()
-        {
-            Ray ray = new Ray(m_Transform.position, Vector3.down);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, groundMask.value))
-                return (hit.point - m_Transform.position).magnitude;
-
-            return 0f;
-        }
-
+        
         #endregion
     }
 }
