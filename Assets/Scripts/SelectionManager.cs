@@ -35,6 +35,7 @@ public class SelectionManager : MonoBehaviour
                 {
                     Destroy(selectableUnit.selectionCircle.gameObject);
                     selectableUnit.selectionCircle = null;
+                    selectableUnit.isSelected = false;
                 }
             }
         }
@@ -52,6 +53,7 @@ public class SelectionManager : MonoBehaviour
                 {
                     if (selectableUnit.selectionCircle == null)
                     {
+                        selectableUnit.isSelected = true;
                         selectableUnit.selectionCircle = Instantiate(selectionCirclePrefab);
                         selectableUnit.selectionCircle.transform.SetParent(selectableUnit.transform, false);
                         selectableUnit.selectionCircle.transform.eulerAngles = new Vector3(90, 0, 0);
@@ -63,7 +65,8 @@ public class SelectionManager : MonoBehaviour
                     if (selectableUnit.selectionCircle != null)
                     {
                         Destroy(selectableUnit.selectionCircle.gameObject);
-                        selectableUnit.selectionCircle = null; 
+                        selectableUnit.selectionCircle = null;
+                        selectableUnit.isSelected = false;
                     }
                 }
             }
