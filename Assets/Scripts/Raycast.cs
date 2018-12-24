@@ -22,14 +22,16 @@ public class Raycast : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetMouseButtonDown(1)) // right click
+        if (Input.GetMouseButtonDown(1) && gameObject.GetComponent<SelectableUnit>().isSelected) // right click
         {
             SetTargetPosition();
         }
 
-        MovePlayer();
 
+        if (gameObject.GetComponent<SelectableUnit>().isSelected)
+        {
+            MovePlayer();
+        }
     }
 
     void SetTargetPosition()

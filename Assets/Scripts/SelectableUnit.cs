@@ -5,4 +5,5 @@ using UnityEngine;
 public class SelectableUnit : MonoBehaviour
 {
     public GameObject selectionCircle;
+    public bool isSelected;
 }
