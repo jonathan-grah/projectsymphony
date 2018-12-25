@@ -52,7 +52,7 @@ LightmapSettings:
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
     m_EnableBakedLightmaps: 0
-    m_EnableRealtimeLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 10
     m_Resolution: 2
@@ -7452,54 +7452,6 @@ PrefabInstance:
     - target: {fileID: 137793889, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: useScrollwheelZooming
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: keyboardZoomingSensitivity
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: autoHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: lastTab
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: keyboardMovementSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: panningSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: mouseRotationSpeed
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: zoomInKey
-      value: 280
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: zoomOutKey
-      value: 281
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: maxHeight
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: minHeight
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: scrollWheelZoomingSensitivity
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
