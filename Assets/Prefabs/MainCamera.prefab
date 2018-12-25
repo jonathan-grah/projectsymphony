@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c51be8e7fda5da4d863b47bd4d50a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastTab: 2
+  lastTab: 1
   movementSettingsFoldout: 0
   zoomingSettingsFoldout: 0
   rotationSettingsFoldout: 0
@@ -127,22 +127,18 @@ MonoBehaviour:
   mapLimitSettingsFoldout: 0
   targetingSettingsFoldout: 0
   inputSettingsFoldout: 0
-  useFixedUpdate: 0
-  keyboardMovementSpeed: 5
-  screenEdgeMovementSpeed: 3
+  useLateUpdate: 0
+  keyboardMovementSpeed: 20
+  screenEdgeMovementSpeed: 20
   followingSpeed: 5
-  rotationSped: 8
-  panningSpeed: 10
-  mouseRotationSpeed: 10
-  autoHeight: 0
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  maxHeight: 10
-  minHeight: 15
+  rotationSpeed: 65
+  panningSpeed: 20
+  mouseRotationSpeed: 65
+  maxHeight: 25
+  minHeight: 2
   heightDampening: 5
-  keyboardZoomingSensitivity: 2
-  scrollWheelZoomingSensitivity: 25
+  keyboardZoomingSensitivity: 15
+  scrollWheelZoomingSensitivity: 10
   limitMap: 0
   limitX: 50
   limitY: 50
@@ -156,9 +152,9 @@ MonoBehaviour:
   usePanning: 1
   panningKey: 325
   useKeyboardZooming: 1
-  zoomInKey: 101
-  zoomOutKey: 113
-  useScrollwheelZooming: 0
+  zoomInKey: 280
+  zoomOutKey: 281
+  useScrollwheelZooming: 1
   zoomingAxis: Mouse ScrollWheel
   useKeyboardRotation: 1
   rotateRightKey: 120
