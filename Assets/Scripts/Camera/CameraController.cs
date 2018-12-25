@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace RTS_Cam
 {
@@ -131,9 +130,9 @@ namespace RTS_Cam
                 if (zoomIn && zoomOut)
                     return 0;
                 else if (!zoomIn && zoomOut)
-                    return 1;
-                else if (zoomIn && !zoomOut)
                     return -1;
+                else if (zoomIn && !zoomOut)
+                    return 1;
                 else
                     return 0;
             }
@@ -264,9 +263,9 @@ namespace RTS_Cam
             if (useKeyboardZooming)
             {
                 if (ZoomDirection > 0 && m_Transform.position.y > minHeight)
-                    m_Transform.position -= m_Transform.forward / 3 * ZoomDirection;
+                    m_Transform.position += m_Transform.forward / 4 * ZoomDirection;
                 else if(ZoomDirection < 0 && m_Transform.position.y < maxHeight)
-                    m_Transform.position -= m_Transform.forward / 3 * ZoomDirection;
+                    m_Transform.position += m_Transform.forward / 4 * ZoomDirection;
             }
         }
 
