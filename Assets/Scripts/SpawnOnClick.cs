@@ -10,24 +10,12 @@ public class SpawnOnClick : MonoBehaviour
 
     public GameObject spawnPoint;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void SpawnUnitOne() //called by button 1 to create unit1 at the HQ spawn point
+    public void SpawnUnitOne() // called by button 1 to create unit1 at the HQ spawn point
     {
         Instantiate(tank, spawnPoint.transform.position, spawnPoint.transform.rotation);
     }
 
-    public void SpawnUnitTwo() //called by button 2 to create unit2 at the HQ spawn point
+    public void SpawnUnitTwo() // called by button 2 to create unit2 at the HQ spawn point
     {
         Instantiate(unit2, spawnPoint.transform.position, spawnPoint.transform.rotation);
     }
