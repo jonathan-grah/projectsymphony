@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11189,6 +11189,7 @@ GameObject:
   - component: {fileID: 770923300}
   - component: {fileID: 770923301}
   - component: {fileID: 770923302}
+  - component: {fileID: 770923303}
   m_Layer: 8
   m_Name: MinimapIcon
   m_TagString: Untagged
@@ -11268,6 +11269,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27977be6e7d5b9649822c7d44d3d92f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &770923303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770923299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d050011721c0ca4bbb5f5879dd36d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &772269726
@@ -12948,7 +12961,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &906926857
 GameObject:
@@ -12979,7 +12992,7 @@ Transform:
   m_Children:
   - {fileID: 441542392}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &907414957
 GameObject:
@@ -18065,7 +18078,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1254463020
 GameObject:
@@ -20607,7 +20620,7 @@ Transform:
   m_Children:
   - {fileID: 1882891}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1430345565
 GameObject:
@@ -29178,7 +29191,7 @@ Transform:
   - {fileID: 2024483437}
   - {fileID: 255527239}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2054779423
 GameObject:
