@@ -26,7 +26,7 @@ namespace RTS_Cam
         #endregion
 
         private Transform m_Transform;
-        public bool useLateUpdate = true;
+        public bool useLateUpdate = false;
 
         #region Movement
 
@@ -43,7 +43,6 @@ namespace RTS_Cam
         
         public float maxHeight = 25f;
         public float minHeight = 2f;
-        public float heightDampening = 5f;
         public float keyboardZoomingSensitivity = 2f;
         public float scrollWheelZoomingSensitivity = 25f;
 
@@ -164,7 +163,7 @@ namespace RTS_Cam
             m_Transform = transform;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (!useLateUpdate)
                 CameraUpdate();
@@ -253,18 +252,18 @@ namespace RTS_Cam
             //Scroll zoom
             if (useScrollwheelZooming)
             {
-                if (ScrollWheel > 0 && m_Transform.position.y > minHeight)
+                if (ScrollWheel > 0 && m_Transform.position.y >= minHeight)
                     m_Transform.position += m_Transform.forward * ScrollWheel * scrollWheelZoomingSensitivity;
-                else if (ScrollWheel < 0 && m_Transform.position.y < maxHeight)
+                else if (ScrollWheel < 0 && m_Transform.position.y <= maxHeight)
                     m_Transform.position += m_Transform.forward * ScrollWheel * scrollWheelZoomingSensitivity;
             }
 
             //Keyboard zoom
             if (useKeyboardZooming)
             {
-                if (ZoomDirection > 0 && m_Transform.position.y > minHeight)
+                if (ZoomDirection > 0 && m_Transform.position.y >= minHeight)
                     m_Transform.position += m_Transform.forward / 4 * ZoomDirection;
-                else if(ZoomDirection < 0 && m_Transform.position.y < maxHeight)
+                else if(ZoomDirection < 0 && m_Transform.position.y <= maxHeight)
                     m_Transform.position += m_Transform.forward / 4 * ZoomDirection;
             }
         }
