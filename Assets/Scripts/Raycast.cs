@@ -22,14 +22,10 @@ public class Raycast : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && gameObject.GetComponent<SelectableUnit>().isSelected) // right click
+        if (gameObject.GetComponent<SelectableUnit>().selectionCircle != null)
         {
-            SetTargetPosition();
-        }
-
-
-        if (gameObject.GetComponent<SelectableUnit>().isSelected)
-        {
+            if (Input.GetMouseButtonDown(1)) // right click
+                SetTargetPosition();
             MovePlayer();
         }
     }
@@ -42,9 +38,7 @@ public class Raycast : MonoBehaviour
         float point = 0f;
 
         if (plane.Raycast(ray, out point))
-        {
             targetPosition = ray.GetPoint(point);
-        }
     }
 
     void MovePlayer()

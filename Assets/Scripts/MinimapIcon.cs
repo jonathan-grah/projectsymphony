@@ -16,11 +16,8 @@ public class MinimapIcon : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = false;
             GetComponent<SpriteRenderer>().flipY = true;
         } else if (angle > 180 && angle <= 270) // left
-        {
             GetComponent<SpriteRenderer>().flipX = true;
-        } else if (angle > 270 && angle <= 360) // up
-        {
+        else if (angle > 270 && angle <= 360) // up
             GetComponent<SpriteRenderer>().flipY = false;
-        }
     }
 }

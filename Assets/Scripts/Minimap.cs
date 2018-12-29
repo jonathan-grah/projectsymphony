@@ -9,16 +9,12 @@ public class Minimap : MonoBehaviour
     void OnPreCull()
     {
         foreach (Light light in Lights)
-        {
             light.enabled = false;
-        }
     }
 
     void OnPostRender()
     {
         foreach (Light light in Lights)
-        {
             light.enabled = true;
-        }
     }
 }

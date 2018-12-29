@@ -1,81 +1,75 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class SelectionManager : MonoBehaviour
+// current bugs:
+// - you can create selection box with basically any mouse key
+// - as soon as you start selecting, clicking doesn't work
+// - ensure clicking works with multiple tanks
+
+public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
-    bool isSelecting = false;
-    Vector3 initialMousePosition;
+    Vector3 startPosition;
+    bool isSelecting;
 
     public GameObject selectionCirclePrefab;
 
     public bool IsWithinSelectionBounds(GameObject gameObject)
     {
-        if (!isSelecting)
-            return false;
-
         var camera = Camera.main;
-        var viewportBounds = Utils.GetViewportBounds(camera, initialMousePosition, Input.mousePosition);
+        var viewportBounds = Utils.GetViewportBounds(camera, startPosition, Input.mousePosition);
 
         return viewportBounds.Contains(camera.WorldToViewportPoint(gameObject.transform.position));
     }
 
-    void Update()
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        if (Input.GetMouseButtonDown(0)) // when click is pressed down
+        if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl))
         {
-            isSelecting = true;
-            initialMousePosition = Input.mousePosition;
-
-            foreach (var selectableUnit in FindObjectsOfType<SelectableUnit>())
-            {
-                if (selectableUnit.selectionCircle != null && initialMousePosition != Input.mousePosition) // ensures dragging and not direct clicking
-                    deselectUnit(selectableUnit);
-
-            }
+            SelectableUnit.DeselectAll(new BaseEventData(EventSystem.current));
         }
+        startPosition = eventData.position;
+    }
 
-        if (Input.GetMouseButtonUp(0)) // when click is released
-        {
-            isSelecting = false;
-        }
-
-        if (isSelecting)
-        {
-            foreach (var selectableUnit in FindObjectsOfType<SelectableUnit>())
-            {
-                if (IsWithinSelectionBounds(selectableUnit.gameObject))
-                    if (selectableUnit.selectionCircle == null)
-                        selectUnit(selectableUnit);
-                else if (initialMousePosition != Input.mousePosition) // ensures dragging and not direct clicking
-                    if (selectableUnit.selectionCircle != null)
-                        deselectUnit(selectableUnit);
-            }
-        }
+    public void OnDrag(PointerEventData eventData)
+    {
+        isSelecting = true;
     }
 
     void OnGUI()
     {
         if (isSelecting)
         {
-            var rect = Utils.GetScreenRect(initialMousePosition, Input.mousePosition);
+            var rect = Utils.GetScreenRect(startPosition, Input.mousePosition);
             Utils.DrawScreenRectBorder(rect, 1, Color.black);
         }
     }
 
-    public void selectUnit(SelectableUnit selectableUnit)
+    public void OnEndDrag(PointerEventData eventData)
     {
-        selectableUnit.isSelected = true;
-        selectableUnit.selectionCircle = Instantiate(selectionCirclePrefab);
-        selectableUnit.selectionCircle.transform.SetParent(selectableUnit.transform, false);
-        selectableUnit.selectionCircle.transform.eulerAngles = new Vector3(90, 0, 0);
+        isSelecting = false;
+        foreach (SelectableUnit selectable in SelectableUnit.allMySelectables)
+        {
+            if (IsWithinSelectionBounds(selectable.gameObject))
+            {
+                selectable.OnSelect(eventData);
+            }
+        }
     }
 
-    public void deselectUnit(SelectableUnit selectableUnit)
+    public void OnPointerClick(PointerEventData eventData)
     {
-        selectableUnit.isSelected = false;
-        Destroy(selectableUnit.selectionCircle.gameObject);
-        selectableUnit.selectionCircle = null;
-    }
+        Ray ray = Camera.main.ScreenPointToRay(eventData.position);
+        RaycastHit hit;
 
+        if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.GetComponent<SelectableUnit>() != null)
+        {
+            var unit = hit.collider.GetComponent<SelectableUnit>();
+            if (unit.selectionCircle == null) unit.OnSelect(eventData);
+            else if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl))
+                unit.OnDeselect(eventData);
+        }
+    }
 }

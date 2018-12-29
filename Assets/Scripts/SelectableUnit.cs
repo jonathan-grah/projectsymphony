@@ -1,32 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class SelectableUnit : MonoBehaviour
+public class SelectableUnit : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
+    public static HashSet<SelectableUnit> allMySelectables = new HashSet<SelectableUnit>();
+    public static HashSet<SelectableUnit> currentlySelected = new HashSet<SelectableUnit>();
+
+    SelectionManager selectionManager;
+
     public GameObject selectionCircle;
-    public bool isSelected;
 
-    private GameObject MainCamera;
-
-    private void Start()
+    void Awake()
     {
-        MainCamera = GameObject.Find("MainCamera");
+        allMySelectables.Add(this);
+        selectionManager = GameObject.Find("Drag Handler").GetComponent<SelectionManager>();
     }
 
-    // BUG: Clicking to select a unit breaks after continuous triggering
-
-    void OnMouseDown()
+    public void OnSelect(BaseEventData eventData)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            if (!isSelected)
-                MainCamera.GetComponent<SelectionManager>().selectUnit(this);
-            else
-                MainCamera.GetComponent<SelectionManager>().deselectUnit(this);
-        }
+        currentlySelected.Add(this);
+        selectionCircle = Instantiate(selectionManager.selectionCirclePrefab);
+        selectionCircle.transform.SetParent(transform, false);
+        selectionCircle.transform.eulerAngles = new Vector3(90, 0, 0);
     }
 
+    public void OnDeselect(BaseEventData eventData)
+    {
+        if (selectionCircle) Destroy(selectionCircle.gameObject);
+        selectionCircle = null;
+    }
+
+    public static void DeselectAll(BaseEventData eventData)
+    {
+        foreach (SelectableUnit selectable in currentlySelected)
+            selectable.OnDeselect(eventData);
+        currentlySelected.Clear();
+    }
 }
