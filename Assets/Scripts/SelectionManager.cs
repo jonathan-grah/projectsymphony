@@ -1,13 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
-// current bugs:
-// - you can create selection box with basically any mouse key
-// - as soon as you start selecting, clicking doesn't work
-// - ensure clicking works with multiple tanks
 
 public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
@@ -27,15 +21,13 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl))
-        {
             SelectableUnit.DeselectAll(new BaseEventData(EventSystem.current));
-        }
         startPosition = eventData.position;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        isSelecting = true;
+        if (Input.GetKey(KeyCode.Mouse0)) isSelecting = true;
     }
 
     void OnGUI()
