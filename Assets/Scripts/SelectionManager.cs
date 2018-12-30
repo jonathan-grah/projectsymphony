@@ -56,14 +56,18 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit)
-            && hit.collider.gameObject.GetComponent<SelectableUnit>() != null
-            && Input.GetKey(KeyCode.Mouse0))
+        if (Physics.Raycast(ray, out hit))
         {
-            var unit = hit.collider.GetComponent<SelectableUnit>();
-            if (unit.selectionCircle == null) unit.OnSelect(eventData);
-            else if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl))
-                unit.OnDeselect(eventData);
+            if (hit.collider.gameObject.GetComponent<SelectableUnit>() != null)
+            {
+                if (eventData.button == PointerEventData.InputButton.Left)
+                {
+                    var unit = hit.collider.GetComponent<SelectableUnit>();
+                    if (unit.selectionCircle == null) unit.OnSelect(eventData);
+                    else if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl))
+                        unit.OnDeselect(eventData);
+                }
+            }
         }
     }
 }
