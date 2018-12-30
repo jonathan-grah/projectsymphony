@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -53,20 +54,45 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Ray ray = Camera.main.ScreenPointToRay(eventData.position);
-        RaycastHit hit;
+        //Click selection only with left-clicking
+        if (eventData.button != PointerEventData.InputButton.Left)
+            return;
 
-        if (Physics.Raycast(ray, out hit))
+        Ray ray = Camera.main.ScreenPointToRay(eventData.position);
+        
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            if (hit.collider.gameObject.GetComponent<SelectableUnit>() != null)
+            var unit = hit.collider.GetComponent<SelectableUnit>();
+            
+            if (unit == null)
             {
-                if (eventData.button == PointerEventData.InputButton.Left)
+                //Deselect all, did not click A selectable
+                if (SelectableUnit.currentlySelected.Any())
+                    SelectableUnit.DeselectAll(eventData);
+
+                return;
+            }
+
+            if (SelectableUnit.currentlySelected.Any())
+            {   
+                if (unit.selectionCircle == null && Input.GetKey(KeyCode.LeftControl))
                 {
-                    var unit = hit.collider.GetComponent<SelectableUnit>();
-                    if (unit.selectionCircle == null) unit.OnSelect(eventData);
-                    else if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl))
-                        unit.OnDeselect(eventData);
+                    unit.OnSelect(eventData);
                 }
+                else if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    unit.OnDeselect(eventData);
+                }
+                else
+                {
+                    SelectableUnit.DeselectAll(eventData);
+
+                    unit.OnSelect(eventData);
+                }
+            }
+            else
+            {
+                unit.OnSelect(eventData);
             }
         }
     }
