@@ -28,7 +28,7 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (Input.GetKey(KeyCode.Mouse0)) isSelecting = true;
+        if (Input.GetKey(KeyCode.Mouse0) && !Input.GetKey(KeyCode.LeftAlt)) isSelecting = true;
     }
 
     void OnGUI()
@@ -54,7 +54,7 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //Click selection only with left-clicking
+        // click selection only with left-clicking
         if (eventData.button != PointerEventData.InputButton.Left)
             return;
 
@@ -66,7 +66,7 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             
             if (unit == null)
             {
-                //Deselect all, did not click A selectable
+                // deselect all, did not click a selectable
                 if (SelectableUnit.currentlySelected.Any())
                     SelectableUnit.DeselectAll(eventData);
 
@@ -74,12 +74,12 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             }
 
             if (SelectableUnit.currentlySelected.Any())
-            {   
+            {
                 if (unit.selectionCircle == null && Input.GetKey(KeyCode.LeftControl))
                 {
                     unit.OnSelect(eventData);
                 }
-                else if (Input.GetKey(KeyCode.LeftControl))
+                else if (unit.selectionCircle != null && !Input.GetKey(KeyCode.LeftControl))
                 {
                     unit.OnDeselect(eventData);
                 }

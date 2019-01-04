@@ -77,7 +77,7 @@ namespace RTS_Cam
         #region Input
 
         public bool useScreenEdgeInput = true;
-        public float screenEdgeBorder = 25f;
+        public float screenEdgeBorder = 5f;
 
         public bool useKeyboardInput = true;
         public string horizontalAxis = "Horizontal";
@@ -217,8 +217,8 @@ namespace RTS_Cam
 
                 Rect leftRect = new Rect(0, 0, screenEdgeBorder, Screen.height);
                 Rect rightRect = new Rect(Screen.width - screenEdgeBorder, 0, screenEdgeBorder, Screen.height);
-                Rect upRect = new Rect(0, Screen.height - screenEdgeBorder, Screen.width, screenEdgeBorder);
-                Rect downRect = new Rect(0, 0, Screen.width, screenEdgeBorder);
+                Rect upRect = new Rect(0, Screen.height - screenEdgeBorder - 35f, Screen.width, screenEdgeBorder);
+                Rect downRect = new Rect(0, 80f, Screen.width, screenEdgeBorder - 10f);
 
                 desiredMove.x = leftRect.Contains(MouseInput) ? -1 : rightRect.Contains(MouseInput) ? 1 : 0;
                 desiredMove.z = upRect.Contains(MouseInput) ? 1 : downRect.Contains(MouseInput) ? -1 : 0;
