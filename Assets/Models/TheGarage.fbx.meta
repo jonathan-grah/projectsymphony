@@ -1,24 +1,59 @@
 fileFormatVersion: 2
-guid: 969db11a0d3c412489f086c1b235944f
+guid: 1a7cd17b01b67f143b818ff3d4eb1d7d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Cube
-    100004: Plane
-    400000: //RootNode
-    400002: Cube
-    400004: Plane
-    2100000: Material.003
-    2100002: Material.001
-    2100004: Material.002
-    2100006: Material
-    2300000: Cube
-    2300002: Plane
-    3300000: Cube
-    3300002: Plane
-    4300000: Cube
-    4300002: Plane
+    100000: Garage
+    100002: GarageDoor
+    100004: Ground
+    100006: SideBuilding
+    100008: //RootNode
+    400000: Garage
+    400002: GarageDoor
+    400004: Ground
+    400006: SideBuilding
+    400008: //RootNode
+    2100000: No Name
+    2100002: Base colour
+    2100004: Material.009
+    2100006: Material.002
+    2100008: Material.008
+    2100010: Material.003
+    2100012: Material.007
+    2100014: Material.001
+    2100016: Material.010
+    2100018: Material.004
+    2100020: Material.005
+    2300000: Garage
+    2300002: GarageDoor
+    2300004: Ground
+    2300006: SideBuilding
+    3300000: Garage
+    3300002: GarageDoor
+    3300004: Ground
+    3300006: SideBuilding
+    4300000: GarageDoor
+    4300002: SideBuilding
+    4300004: Ground
+    4300006: Garage
+    7400000: GarageDoor|Cube.001Action
+    7400002: GarageDoor|CubeAction
+    7400004: GarageDoor|Door animation
+    7400006: GarageDoor|PlaneAction
+    7400008: SideBuilding|Cube.001Action
+    7400010: SideBuilding|CubeAction
+    7400012: SideBuilding|Door animation
+    7400014: SideBuilding|PlaneAction
+    7400016: Ground|Cube.001Action
+    7400018: Ground|CubeAction
+    7400020: Ground|Door animation
+    7400022: Ground|PlaneAction
+    7400024: Garage|Cube.001Action
+    7400026: Garage|CubeAction
+    7400028: Garage|Door animation
+    7400030: Garage|PlaneAction
+    9500000: //RootNode
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -71,8 +106,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -99,7 +134,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
