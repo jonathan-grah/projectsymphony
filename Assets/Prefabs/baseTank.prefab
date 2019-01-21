@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1882891}
   - component: {fileID: 1452144754}
   - component: {fileID: 1452144755}
-  - component: {fileID: 1452144756}
   - component: {fileID: 1452144757}
-  m_Layer: 0
+  - component: {fileID: 3181470769922079058}
+  m_Layer: 8
   m_Name: baseTank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882890}
-  m_LocalRotation: {x: 0.03813404, y: 0.7030174, z: -0.0026058666, w: 0.7101447}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -10.937971, y: 0, z: 7.572917}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 770923300}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 3.315, y: 89.505005, z: 2.8660002}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1452144754
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -62,18 +62,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionCircle: {fileID: 0}
---- !u!114 &1452144756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1882890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7ca0f0e2e094de49baeffded4b5c1b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!195 &1452144757
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -83,19 +71,31 @@ NavMeshAgent:
   m_GameObject: {fileID: 1882890}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 2
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 80
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.91
+  m_Height: 1.56
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3181470769922079058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1882890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f4ccd46db9dc34993e3250f0abf6ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &253827841
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 253827842}
   - component: {fileID: 253827845}
   - component: {fileID: 253827844}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: hull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 770923301}
   - component: {fileID: 770923302}
   - component: {fileID: 770923303}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: MinimapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,8 +203,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770923299}
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 2.47, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 1882891}
   m_RootOrder: 1
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 1151458599}
   - component: {fileID: 1151458602}
   - component: {fileID: 1151458601}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left track
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 1173238500}
   - component: {fileID: 1173238503}
   - component: {fileID: 1173238502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 1891466444}
   - component: {fileID: 1891466447}
   - component: {fileID: 1891466446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 2096421792}
   - component: {fileID: 2096421795}
   - component: {fileID: 2096421794}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right track
   m_TagString: Untagged
   m_Icon: {fileID: 0}
