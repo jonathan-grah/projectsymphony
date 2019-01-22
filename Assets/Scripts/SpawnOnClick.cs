@@ -31,7 +31,6 @@ public class SpawnOnClick : MonoBehaviour
 
     public void SpawnBasicTank() // called by button 1 to create unit1 at the HQ spawn point
     {
-        Debug.Log("TANK");
         spawnLandUnit(tank);
     }
 
