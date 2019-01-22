@@ -6,34 +6,33 @@ public class SpawnOnClick : MonoBehaviour
 {
 
     public GameObject tank;
-    public float unitOneSpawnCooldown;
+    public bool landCooldownActive = false;
+    public bool seaCooldownActive = false;
+    public bool airCooldownActive = false;
 
-    public GameObject unit2;
-    public float unitTwoSpawnCooldown;
+    public Transform spawnPoint;
 
-    public GameObject unit3;
-    public float unitThreeSpawnCooldown;
-
-    public GameObject spawnPoint;
-
-
-    public bool CooldownActive;
-    public float timer;
-
-
-    public void SpawnUnitOne() // called by button 1 to create unit1 at the HQ spawn point
+    private IEnumerator cooldown()
     {
-        Instantiate(tank, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        landCooldownActive = true;
+        yield return new WaitForSeconds(3);
+        landCooldownActive = false;
     }
 
-    public void SpawnUnitTwo() // called by button 2 to create unit2 at the HQ spawn point
+    void spawnLandUnit(GameObject unit)
     {
-        Instantiate(unit2, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        if (!landCooldownActive)
+        {
+            var newUnit = Instantiate(unit, spawnPoint.position, spawnPoint.rotation);
+            newUnit.transform.parent = GameObject.Find("Units").transform;
+            StartCoroutine(cooldown());
+        }
     }
 
-    public void SpawnUnitThree() // called by button 3 to create unit3 at the HQ spawn point
+    public void SpawnBasicTank() // called by button 1 to create unit1 at the HQ spawn point
     {
-        Instantiate(unit3, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        Debug.Log("TANK");
+        spawnLandUnit(tank);
     }
 
 }
