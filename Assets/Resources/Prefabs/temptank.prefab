@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3181470769922079058}
   m_Layer: 8
   m_Name: baseTank
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16f4ccd46db9dc34993e3250f0abf6ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitObject:
+    health: 20
 --- !u!1 &253827841
 GameObject:
   m_ObjectHideFlags: 0

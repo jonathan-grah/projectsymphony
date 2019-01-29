@@ -44,12 +44,8 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     {
         isSelecting = false;
         foreach (SelectableUnit selectable in SelectableUnit.allMySelectables)
-        {
             if (IsWithinSelectionBounds(selectable.gameObject))
-            {
                 selectable.OnSelect(eventData);
-            }
-        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -59,11 +55,10 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             return;
 
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
-        
+
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             var unit = hit.collider.GetComponent<SelectableUnit>();
-            
             if (unit == null)
             {
                 // deselect all, did not click a selectable
@@ -76,24 +71,17 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             if (SelectableUnit.currentlySelected.Any())
             {
                 if (unit.selectionCircle == null && Input.GetKey(KeyCode.LeftControl))
-                {
                     unit.OnSelect(eventData);
-                }
                 else if (unit.selectionCircle != null && !Input.GetKey(KeyCode.LeftControl))
-                {
                     unit.OnDeselect(eventData);
-                }
                 else
                 {
                     SelectableUnit.DeselectAll(eventData);
-
                     unit.OnSelect(eventData);
                 }
             }
             else
-            {
                 unit.OnSelect(eventData);
-            }
         }
     }
 }

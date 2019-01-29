@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,19 +20,20 @@ public class SpawnOnClick : MonoBehaviour
         landCooldownActive = false;
     }
 
-    void spawnLandUnit(GameObject unit)
+    void spawnLandUnit(GameObject unit, string prefabName)
     {
         if (!landCooldownActive)
         {
+            unit.GetComponent<UnitController>().unitDetails.id = $"{prefabName}_{Guid.NewGuid().ToString()}";
             var newUnit = Instantiate(unit, spawnPoint.position, spawnPoint.rotation);
             newUnit.transform.parent = GameObject.Find("Units").transform;
             StartCoroutine(cooldown());
         }
     }
 
-    public void SpawnBasicTank() // called by button 1 to create unit1 at the HQ spawn point
+    public void SpawnBasicTank()
     {
-        spawnLandUnit(tank);
+        spawnLandUnit(tank, "temptank");
     }
 
 }
