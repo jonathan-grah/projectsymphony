@@ -6235,6 +6235,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
+      propertyPath: screenEdgeBorder
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 137793889, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6290,10 +6294,6 @@ PrefabInstance:
     - target: {fileID: 137793888, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 279
-      objectReference: {fileID: 0}
-    - target: {fileID: 137793885, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}
-      propertyPath: screenEdgeBorder
-      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f71b3b891e598f49b3245790a80e0a3, type: 3}

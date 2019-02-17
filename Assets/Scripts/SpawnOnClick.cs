@@ -33,7 +33,7 @@ public class SpawnOnClick : MonoBehaviour
 
     public void SpawnBasicTank()
     {
-        spawnLandUnit(tank, "temptank");
+        spawnLandUnit(tank, "sturmgeschutz_iv");
     }
 
 }
