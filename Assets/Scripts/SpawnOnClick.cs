@@ -6,10 +6,11 @@ using UnityEngine;
 public class SpawnOnClick : MonoBehaviour
 {
 
-    public GameObject tank;
-    public bool landCooldownActive = false;
-    public bool seaCooldownActive = false;
-    public bool airCooldownActive = false;
+    public GameObject assaultGun;
+
+    private bool landCooldownActive = false;
+    private bool seaCooldownActive = false;
+    private bool airCooldownActive = false;
 
     public Transform spawnPoint;
 
@@ -33,7 +34,7 @@ public class SpawnOnClick : MonoBehaviour
 
     public void SpawnBasicTank()
     {
-        spawnLandUnit(tank, "sturmgeschutz_iv");
+        spawnLandUnit(assaultGun, "temptank");
     }
 
 }

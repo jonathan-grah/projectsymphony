@@ -68,13 +68,31 @@ public class SaveManager : MonoBehaviour
         Debug.Log(saveData.Units[0].id);
     }
 
+    public static SaveData QuerySave(string saveName)
+    {
+        string path = Path.Combine(Application.persistentDataPath, Path.Combine("saves", saveName + ".sym"));
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream stream = new FileStream(path, FileMode.Open))
+            {
+                return formatter.Deserialize(stream) as SaveData;
+            }
+
+        }
+        else
+        {
+            Debug.Log("Warning: Save file cannot be found");
+            return null;
+        }
+    }
+
     public SaveData LoadGame(string saveName)
     {
         string path = Path.Combine(Application.persistentDataPath, Path.Combine("saves", saveName + ".sym"));
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
-
             using (FileStream stream = new FileStream(path, FileMode.Open))
             {
                 saveData = formatter.Deserialize(stream) as SaveData;

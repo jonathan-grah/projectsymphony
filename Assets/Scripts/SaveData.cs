@@ -8,7 +8,7 @@ public class SaveData
 {
     private string id = Guid.NewGuid().ToString();
     public String saveName;
-    private string createdDate = DateTime.Now.ToString();
+    public String createdDate = "";//DateTime.Now.ToString();
     public List<UnitDetails> Units = new List<UnitDetails>();
 
     public SaveData(string saveName)

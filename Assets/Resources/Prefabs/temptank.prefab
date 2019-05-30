@@ -102,7 +102,6 @@ MonoBehaviour:
     position: 
     rotation: 
     localScale: 
-  currentCorner: 0
 --- !u!1 &253827841
 GameObject:
   m_ObjectHideFlags: 0
