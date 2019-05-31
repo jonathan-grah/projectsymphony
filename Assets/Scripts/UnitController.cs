@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class UnitController : MonoBehaviour
 {
     public UnitDetails unitDetails;
+    GameObject navTarget;
 
     NavMeshPath path;
     NavMeshAgent unitAgent;
@@ -15,6 +16,9 @@ public class UnitController : MonoBehaviour
     void Awake()
     {
         unitAgent = GetComponent<NavMeshAgent>();
+
+        navTarget = GameObject.Find("Navigation Target");
+        navTarget.SetActive(false);
     }
 
     public void Save()
@@ -54,7 +58,7 @@ public class UnitController : MonoBehaviour
     {
         if (gameObject.GetComponent<SelectableUnit>().selectionCircle != null)
             if (Input.GetMouseButtonDown(1)) // right click
-                move(); // generates path
+                StartCoroutine(startPath()); // generates path
         if (path != null && path.corners.Length > (currentCorner + 1))
         {
             if (Vector3.Distance(transform.position, path.corners[currentCorner]) <= 0) // if reached corner
@@ -66,7 +70,7 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    void move()
+    IEnumerator startPath()
     {
         RaycastHit hit;
         Ray raycast = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -75,10 +79,14 @@ public class UnitController : MonoBehaviour
         {
             if (hit.transform.tag != "Obstacle")
             {
+                navTarget.transform.position = hit.point;
+                navTarget.SetActive(true);
                 path = new NavMeshPath();
                 currentCorner = 0;
                 unitAgent.CalculatePath(hit.point, path);
                 RotateAndMove();
+                yield return new WaitForSeconds(2);
+                navTarget.SetActive(false);
             }
         }
 
