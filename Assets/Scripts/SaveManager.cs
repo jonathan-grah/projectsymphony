@@ -50,6 +50,11 @@ public class SaveManager : MonoBehaviour
             savesDir.Create();
         if (currentSaveName.Length <= 0) Debug.Log("You have not entered an appropriate save name");
         string path = Path.Combine(Application.persistentDataPath, Path.Combine("saves", currentSaveName + ".sym"));
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+
         BinaryFormatter formatter = new BinaryFormatter();
 
         using (FileStream stream = new FileStream(path, FileMode.Create))
