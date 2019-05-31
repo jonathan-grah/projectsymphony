@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 
 public class UnitController : MonoBehaviour
@@ -18,7 +19,6 @@ public class UnitController : MonoBehaviour
         unitAgent = GetComponent<NavMeshAgent>();
 
         navTarget = GameObject.Find("Navigation Target");
-        navTarget.SetActive(false);
     }
 
     public void Save()
@@ -80,13 +80,13 @@ public class UnitController : MonoBehaviour
             if (hit.transform.tag != "Obstacle")
             {
                 navTarget.transform.position = hit.point;
-                navTarget.SetActive(true);
+                navTarget.GetComponent<Projector>().enabled = true;
                 path = new NavMeshPath();
                 currentCorner = 0;
                 unitAgent.CalculatePath(hit.point, path);
                 RotateAndMove();
                 yield return new WaitForSeconds(2);
-                navTarget.SetActive(false);
+                navTarget.GetComponent<Projector>().enabled = false;
             }
         }
 

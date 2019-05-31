@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
-    private SaveData saveData = null;
+    private static SaveData saveData = null;
 
     private string currentSaveName = "";
 
@@ -87,7 +87,7 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public SaveData LoadGame(string saveName)
+    public static SaveData LoadGame(string saveName)
     {
         string path = Path.Combine(Application.persistentDataPath, Path.Combine("saves", saveName + ".sym"));
         if (File.Exists(path))
