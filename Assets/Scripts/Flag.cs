@@ -7,6 +7,13 @@ public class Flag : MonoBehaviour
 {
     private Vector3 initialPos;
 
+    SelectionManager selectionManager;
+
+    void Awake()
+    {
+        selectionManager = GameObject.Find("Drag Handler").GetComponent<SelectionManager>();
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -16,6 +23,8 @@ public class Flag : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+            selectionManager.isSelecting = false;
+
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 

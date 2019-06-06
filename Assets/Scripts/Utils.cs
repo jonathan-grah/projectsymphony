@@ -67,6 +67,6 @@ public static class Utils
         List<RaycastResult> hits = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerEventData, hits);
 
-        return hits.Count > 0;
+        return hits.Count > 1;
     }
 }

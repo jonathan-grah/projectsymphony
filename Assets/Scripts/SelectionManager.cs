@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     Vector3 startPosition;
-    bool isSelecting;
+    public bool isSelecting;
 
     public GameObject selectionCirclePrefab;
 
