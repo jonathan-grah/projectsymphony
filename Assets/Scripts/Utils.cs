@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public static class Utils
 {
@@ -56,5 +57,16 @@ public static class Utils
         var bounds = new Bounds();
         bounds.SetMinMax(min, max);
         return bounds;
+    }
+
+    public static bool IsPointerOverUI()
+    {
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+
+        List<RaycastResult> hits = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, hits);
+
+        return hits.Count > 0;
     }
 }
