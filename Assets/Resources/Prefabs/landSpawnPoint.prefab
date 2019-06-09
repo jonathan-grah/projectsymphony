@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6793254546968422400}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7132627288830764812}
   - component: {fileID: 6120085917568718305}
   - component: {fileID: 7243950203080347215}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 5031126573787375939}
   - component: {fileID: 5211445089181914775}
   - component: {fileID: 2087291397327333468}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: landSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1610644051463172312}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Convex: 1
@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 3921756520527356993}
   - component: {fileID: 644002249789091422}
   - component: {fileID: 324433925692906194}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

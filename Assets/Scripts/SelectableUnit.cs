@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class SelectableUnit : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
-    public static HashSet<SelectableUnit> allMySelectables = new HashSet<SelectableUnit>();
+    public static HashSet<SelectableUnit> selectableUnits = new HashSet<SelectableUnit>();
     public static HashSet<SelectableUnit> currentlySelected = new HashSet<SelectableUnit>();
 
     SelectionManager selectionManager;
@@ -14,7 +14,7 @@ public class SelectableUnit : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     void Awake()
     {
-        allMySelectables.Add(this);
+        selectableUnits.Add(this);
         selectionManager = GameObject.Find("Drag Handler").GetComponent<SelectionManager>();
     }
 

@@ -44,14 +44,8 @@ public class SpawnManager : MonoBehaviour
 
     public void ToggleFlagAdjustment()
     {
-        if (landSpawnPoint.activeSelf)
-        {
-            landSpawnPoint.SetActive(false);
-        }
-        else
-        {
-            landSpawnPoint.SetActive(true);
-        }
+        if (landSpawnPoint.activeSelf) landSpawnPoint.SetActive(false);
+        else landSpawnPoint.SetActive(true);
     }
 
 }

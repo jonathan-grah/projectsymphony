@@ -43,7 +43,7 @@ public class SelectionManager : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     public void OnEndDrag(PointerEventData eventData)
     {
         isSelecting = false;
-        foreach (SelectableUnit selectable in SelectableUnit.allMySelectables)
+        foreach (SelectableUnit selectable in SelectableUnit.selectableUnits)
             if (IsWithinSelectionBounds(selectable.gameObject))
                 selectable.OnSelect(eventData);
     }

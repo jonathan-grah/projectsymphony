@@ -10,9 +10,13 @@ public class UnitController : MonoBehaviour
     public UnitDetails unitDetails;
     GameObject navTarget;
 
-    NavMeshPath path;
+    List<Vector3> waypoints = new List<Vector3>();
+    NavMeshPath currentPath;
+    int currentCorner = 0;
+    bool navStatus = false;
+
     NavMeshAgent unitAgent;
-    private int currentCorner = 0;
+
 
     void Awake()
     {
@@ -36,41 +40,62 @@ public class UnitController : MonoBehaviour
         unitDetails = newDetails;
     }
 
-    private IEnumerator RotateAndMove()
+    IEnumerator nextCorner()
     {
-        while (Vector3.Distance(transform.position, path.corners[currentCorner]) > 0.5f)
+        navStatus = true;
+        while (Vector3.Distance(transform.position, currentPath.corners[currentCorner]) > 0.5f) // while not near corner
         {
-            Vector3 newDir = path.corners[currentCorner] - transform.position;
+            Vector3 newDir = currentPath.corners[currentCorner] - transform.position;
             Quaternion rotation = Quaternion.LookRotation(newDir);
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * 0.9f); // look at next corner
 
             yield return new WaitForEndOfFrame();
 
-            if (currentCorner != 0)
-                if (Vector3.Dot(transform.TransformDirection(Vector3.forward), (path.corners[currentCorner] - transform.position).normalized) > 0.75)
-                {
-                    unitAgent.destination = path.corners[currentCorner];
-                }
+            if (Vector3.Dot(transform.TransformDirection(Vector3.forward), (currentPath.corners[currentCorner] - transform.position).normalized) > 0.75)
+            {
+                unitAgent.destination = currentPath.corners[currentCorner];
+            }
         }
+        if (currentPath.corners.Length == (currentCorner + 1)) // if last corner
+            navStatus = false;
     }
 
     void Update()
     {
         if (gameObject.GetComponent<SelectableUnit>().selectionCircle != null)
-            if (Input.GetMouseButtonDown(1)) // right click
-                StartCoroutine(startPath()); // generates path
-        if (path != null && path.corners.Length > (currentCorner + 1))
-        {
-            if (Vector3.Distance(transform.position, path.corners[currentCorner]) <= 0) // if reached corner
+            if (navStatus && Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(1)) // shift + right click
             {
-                currentCorner += 1;
-                Debug.DrawLine(transform.position, path.corners[currentCorner], Color.red);
-                StartCoroutine(RotateAndMove());
+                StartCoroutine(createPath());
             }
+            else if (Input.GetMouseButtonDown(1)) // right click
+            {
+                navStatus = false;
+                waypoints.Clear();
+                StartCoroutine(createPath());
+            }
+
+        if (navStatus)
+        {
+            if (currentPath != null && currentPath.corners.Length > (currentCorner + 1))
+            {
+                if (Vector3.Distance(transform.position, currentPath.corners[currentCorner]) <= 0.5f) // if reached corner
+                {
+                    currentCorner += 1;
+                    StartCoroutine(nextCorner()); // start towards next corner
+                }
+            }
+        }
+        else if (!navStatus && waypoints.Count > 0) // if not navigating and there's another path to navigate to
+        {
+            currentPath = new NavMeshPath(); // adds oldest path to current path
+            unitAgent.CalculatePath(waypoints[0], currentPath);
+            waypoints.RemoveAt(0); // removes from paths backlog
+            currentCorner = 0; // reset corner
+            StartCoroutine(nextCorner());
         }
     }
 
-    IEnumerator startPath()
+    IEnumerator createPath()
     {
         RaycastHit hit;
         Ray raycast = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -81,14 +106,10 @@ public class UnitController : MonoBehaviour
             {
                 navTarget.transform.position = hit.point;
                 navTarget.GetComponent<Projector>().enabled = true;
-                path = new NavMeshPath();
-                currentCorner = 0;
-                unitAgent.CalculatePath(hit.point, path);
-                RotateAndMove();
+                waypoints.Add(hit.point);
                 yield return new WaitForSeconds(2);
                 navTarget.GetComponent<Projector>().enabled = false;
             }
         }
-
     }
 }
