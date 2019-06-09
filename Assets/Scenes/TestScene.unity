@@ -283,49 +283,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181886881}
   m_CullTransparentMesh: 0
---- !u!1 &243501622
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 243501624}
-  - component: {fileID: 243501623}
-  m_Layer: 0
-  m_Name: Start Processor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &243501623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243501622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d56b8dc5464ddb44a9814379fc68468, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &243501624
+--- !u!4 &236547851 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 400008, guid: 1a7cd17b01b67f143b818ff3d4eb1d7d,
+    type: 3}
+  m_PrefabInstance: {fileID: 247524377}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243501622}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 671.59735, y: 491.26855, z: -2.2083158}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &247524377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -562,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef8c68bade09b41aca258d42a632f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastTab: 2
+  lastTab: 0
   movementSettingsFoldout: 0
   zoomingSettingsFoldout: 0
   rotationSettingsFoldout: 0
@@ -571,7 +534,7 @@ MonoBehaviour:
   targetingSettingsFoldout: 0
   inputSettingsFoldout: 0
   useFixedUpdate: 0
-  keyboardMovementSpeed: 30
+  keyboardMovementSpeed: 58.7
   screenEdgeMovementSpeed: 3
   followingSpeed: 5
   rotationSped: 3
@@ -632,7 +595,7 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 21, y: 15.2}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 7.3392344
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -641,7 +604,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 61
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -667,7 +630,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 424677081}
   m_LocalRotation: {x: 0.2588191, y: -0, z: -0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 16.399979, z: -23.400017}
+  m_LocalPosition: {x: 0, y: 37.42, z: -193.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -928,6 +891,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 535937244}
+  - component: {fileID: 535937247}
   - component: {fileID: 535937245}
   - component: {fileID: 535937246}
   m_Layer: 0
@@ -965,6 +929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assaultGun: {fileID: 8044903223892720667, guid: 41f7e8db19f315a4781ca5f5c5ed0b74,
     type: 3}
+  garage: {fileID: 236547851}
   landSpawnPoint: {fileID: 1610644051463172312}
 --- !u!114 &535937246
 MonoBehaviour:
@@ -995,6 +960,18 @@ MonoBehaviour:
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &535937247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535937243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d56b8dc5464ddb44a9814379fc68468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &693413430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,7 +1439,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 243501623}
+      - m_Target: {fileID: 0}
         m_MethodName: EditSaveName
         m_Mode: 0
         m_Arguments:
@@ -1742,7 +1719,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 243501623}
+      - m_Target: {fileID: 0}
         m_MethodName: SaveGame
         m_Mode: 1
         m_Arguments:
@@ -3325,7 +3302,7 @@ PrefabInstance:
     - target: {fileID: 7650644590227538403, guid: 0c4c5f1af39a86d4dbbf76065b64f83c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7650644590227538403, guid: 0c4c5f1af39a86d4dbbf76065b64f83c,
         type: 3}

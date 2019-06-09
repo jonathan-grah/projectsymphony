@@ -10,7 +10,7 @@ public class UnitController : MonoBehaviour
     public UnitDetails unitDetails;
     GameObject navTarget;
 
-    List<Vector3> waypoints = new List<Vector3>();
+    public List<Vector3> waypoints = new List<Vector3>();
     NavMeshPath currentPath;
     int currentCorner = 0;
     bool navStatus = false;

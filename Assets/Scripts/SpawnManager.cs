@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class SpawnManager : MonoBehaviour
     private bool seaCooldownActive = false;
     private bool airCooldownActive = false;
 
+    public Transform garage;
     public GameObject landSpawnPoint;
 
     private IEnumerator cooldown()
@@ -30,9 +32,10 @@ public class SpawnManager : MonoBehaviour
     {
         if (!landCooldownActive)
         {
-            unit.GetComponent<UnitController>().unitDetails.id = $"{prefabName}_{Guid.NewGuid().ToString()}";
-            var newUnit = Instantiate(unit, landSpawnPoint.transform.position, landSpawnPoint.transform.rotation);
+            var newUnit = Instantiate(unit, garage.position, landSpawnPoint.transform.rotation);
             newUnit.transform.parent = GameObject.Find("Units").transform;
+            newUnit.GetComponent<UnitController>().unitDetails.id = $"{prefabName}_{Guid.NewGuid().ToString()}";
+            newUnit.GetComponent<UnitController>().waypoints.Add(landSpawnPoint.transform.position);
             StartCoroutine(cooldown());
         }
     }
